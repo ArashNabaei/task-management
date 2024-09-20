@@ -12,7 +12,8 @@
 
         public int UserId { get; set; }
 
+        public Status Status { get; set; }
 
-
+        public Priority Priority { get; set; }
     }
 }
