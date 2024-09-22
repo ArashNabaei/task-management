@@ -12,8 +12,12 @@
 
         public int UserId { get; set; }
 
+        public User User { get; set; }
+
         public Status Status { get; set; }
 
         public Priority Priority { get; set; }
+
+        public List<Entities.Task> Tasks { get; set; }
     }
 }
