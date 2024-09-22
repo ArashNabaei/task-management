@@ -41,6 +41,11 @@ namespace task_management.Persistence
 
             modelBuilder.Entity<SubTask>()
                .HasKey(st => st.Id);
+
+            modelBuilder.Entity<SubTask>()
+                .HasOne<Entities.Task>(st => st.ParentTask)
+                .WithMany(t => t.SubTasks)
+                .HasForeignKey(st => st.ParentId);
         }
 
     }
