@@ -17,5 +17,7 @@
         public int LoggedHours { get; set; }
 
         public int ParentId { get; set; }
+
+        public Task ParentTask { get; set; }
     }
 }

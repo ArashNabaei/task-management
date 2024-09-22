@@ -16,6 +16,10 @@
 
         public int ProjectId { get; set; }
 
+        public Project Project { get; set; }
+
         public int LoggedHours { get; set; }
+
+        public List<SubTask> SubTasks { get; set; }
     }
 }
