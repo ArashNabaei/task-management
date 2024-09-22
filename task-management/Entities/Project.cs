@@ -18,6 +18,6 @@
 
         public Priority Priority { get; set; }
 
-        public List<Entities.Task> Tasks { get; set; }
+        public List<WorkTask> Tasks { get; set; }
     }
 }

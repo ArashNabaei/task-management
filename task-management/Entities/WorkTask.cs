@@ -1,6 +1,6 @@
 ﻿namespace task_management.Entities
 {
-    public class Task
+    public class WorkTask
     {
         public int Id { get; set; }
 

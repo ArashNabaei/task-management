@@ -18,6 +18,6 @@
 
         public int ParentId { get; set; }
 
-        public Task ParentTask { get; set; }
+        public WorkTask ParentTask { get; set; }
     }
 }
