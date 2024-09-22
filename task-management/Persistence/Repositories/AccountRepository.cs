@@ -1,4 +1,5 @@
-﻿using task_management.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using task_management.Entities;
 using task_management.Persistence.Interfaces;
 
 namespace task_management.Persistence.Repositories
@@ -24,6 +25,15 @@ namespace task_management.Persistence.Repositories
             await _context.Users.AddAsync(user);
 
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<User?> GetUser(string username, string password)
+        {
+            var user = await _context.Users
+                .SingleOrDefaultAsync(u => u.Username == username 
+                && u.Password == password);
+
+            return user;
         }
 
     }
