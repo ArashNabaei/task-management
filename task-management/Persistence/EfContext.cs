@@ -22,6 +22,9 @@ namespace task_management.Persistence
         {
             modelBuilder.Entity<User>()
                 .HasKey(u => u.Id);
+
+            modelBuilder.Entity<Project>()
+                .HasKey(p => p.Id);
         }
 
     }
