@@ -18,5 +18,11 @@ namespace task_management.Persistence
         
         public DbSet<SubTask> SubTasks { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasKey(u => u.Id);
+        }
+
     }
 }
