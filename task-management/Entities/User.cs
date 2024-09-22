@@ -18,5 +18,7 @@
 
         public DateTime CreatedAt { get; set; }
 
+        public List<Project> Projects { get; set; }
+
     }
 }

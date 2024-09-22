@@ -25,6 +25,11 @@ namespace task_management.Persistence
 
             modelBuilder.Entity<Project>()
                 .HasKey(p => p.Id);
+
+            modelBuilder.Entity<Project>()
+               .HasOne<User>(p => p.User)
+               .WithMany(u => u.Projects)
+               .HasForeignKey(p => p.UserId);
         }
 
     }
