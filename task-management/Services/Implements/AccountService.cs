@@ -1,4 +1,9 @@
-﻿using task_management.Entities;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using task_management.Entities;
 using task_management.Persistence.Interfaces;
 using task_management.Services.Interfaces;
 
@@ -9,9 +14,12 @@ namespace task_management.Services.Implements
 
         private readonly IAccountRepository _accountRepository;
 
-        public AccountService(IAccountRepository accountRepository)
+        private readonly IConfiguration _configuration;
+
+        public AccountService(IAccountRepository accountRepository, IConfiguration configuration)
         {
             _accountRepository = accountRepository;
+            _configuration = configuration;
         }
 
         public async Task CreateUser(Account user)
@@ -33,8 +41,27 @@ namespace task_management.Services.Implements
 
             if (user == null)
                 throw new Exception("The username or password does not exist.");
-
             return user.Id;
+        }
+
+        public string GenerateToken(int userId)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_configuration.GetValue<string>("Jwt:Key"));
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString())
+                }),
+                NotBefore = DateTime.UtcNow,
+                Expires = DateTime.UtcNow.AddMinutes(_configuration.GetValue<double>("Jwt:ExpiryMinutes")),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
 
     }
