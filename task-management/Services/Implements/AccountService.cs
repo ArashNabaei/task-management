@@ -27,5 +27,15 @@ namespace task_management.Services.Implements
             await _accountRepository.CreateUser(username, password);
         }
 
+        public async Task<int> ValidateUser(string username, string password)
+        {
+            var user = await _accountRepository.GetUser(username, password);
+
+            if (user == null)
+                throw new Exception("The username or password does not exist.");
+
+            return user.Id;
+        }
+
     }
 }
