@@ -5,8 +5,8 @@ namespace task_management.Persistence.Interfaces
     public interface IProfileRepository
     {
 
-        Task<User?> GetProfile(int UserId);
+        Task<User?> GetProfile(int id);
 
-        Task UpdateProfile(int userId, User user);
+        Task UpdateProfile(int id, User user);
     }
 }
