@@ -21,5 +21,10 @@ namespace task_management.Services.Implements
             return user;
         }
 
+        public async Task UpdateProfile(int id, User user)
+        {
+            await _profileRepository.UpdateProfile(id, user);
+        }
+
     }
 }

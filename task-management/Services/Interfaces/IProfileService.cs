@@ -6,6 +6,6 @@ namespace task_management.Services.Interfaces
     {
         Task<User?> GetProfile(int id);
 
-        Task UpdateUser(int id, User user);
+        Task UpdateProfile(int id, User user);
     }
 }
