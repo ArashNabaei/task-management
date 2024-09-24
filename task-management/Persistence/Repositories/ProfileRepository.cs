@@ -20,5 +20,25 @@ namespace task_management.Persistence.Repositories
             return user;
         }
 
+        public async Task UpdateProfile(int id, User user)
+        {
+            var existingUser = await _context.Users.FindAsync(id);
+            
+            UpdateUserFields(user, existingUser);
+
+            _context.Users.Update(existingUser);
+            await _context.SaveChangesAsync();
+        }
+
+        private static void UpdateUserFields(User user, User existingUser)
+        {
+            existingUser.FirstName = user.FirstName;
+            existingUser.LastName = user.LastName;
+            existingUser.Email = user.Email;
+            existingUser.PhoneNumber = user.PhoneNumber;
+            existingUser.Username = user.Username;
+            existingUser.Password = user.Password;
+        }
+
     }
 }
