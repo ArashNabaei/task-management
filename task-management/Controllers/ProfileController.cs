@@ -25,5 +25,13 @@ namespace task_management.Controllers
             return Ok(new { Profile = profile });
         }
 
+        [HttpPut("Profile")]
+        public async Task<IActionResult> UpdateProfile([FromBody] User user)
+        {
+            await _profileService.UpdateProfile(UserId, user);
+
+            return Ok();
+        }
+
     }
 }
