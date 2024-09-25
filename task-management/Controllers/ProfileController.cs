@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using task_management.Entities;
+using task_management.Services.Entities;
 using task_management.Services.Interfaces;
 
 namespace task_management.Controllers
@@ -26,7 +26,7 @@ namespace task_management.Controllers
         }
 
         [HttpPut("Profile")]
-        public async Task<IActionResult> UpdateProfile([FromBody] User user)
+        public async Task<IActionResult> UpdateProfile([FromBody] UserDto user)
         {
             await _profileService.UpdateProfile(UserId, user);
 
