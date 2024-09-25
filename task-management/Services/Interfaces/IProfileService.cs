@@ -1,5 +1,4 @@
-﻿using task_management.Entities;
-using task_management.Services.Entities;
+﻿using task_management.Services.Entities;
 
 namespace task_management.Services.Interfaces
 {
@@ -7,6 +6,6 @@ namespace task_management.Services.Interfaces
     {
         Task<UserDto?> GetProfile(int id);
 
-        Task UpdateProfile(int id, User user);
+        Task UpdateProfile(int id, UserDto user);
     }
 }

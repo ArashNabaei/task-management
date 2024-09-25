@@ -23,9 +23,24 @@ namespace task_management.Services.Implements
             return result;
         }
 
-        public async Task UpdateProfile(int id, User user)
+        public async Task UpdateProfile(int id, UserDto user)
         {
-            await _profileRepository.UpdateProfile(id, user);
+            var result = ConvertUserDtoToUser(user);
+
+            await _profileRepository.UpdateProfile(id, result);
+        }
+
+        private static User ConvertUserDtoToUser(UserDto user)
+        {
+            return new User
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Username = user.Username,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+            };
         }
 
         private static UserDto ConvertUserToUserDto(User? user)
