@@ -1,6 +1,6 @@
 ﻿using task_management.Entities;
-using task_management.Persistence;
 using task_management.Persistence.Interfaces;
+using task_management.Services.Entities;
 using task_management.Services.Interfaces;
 
 namespace task_management.Services.Implements
@@ -14,16 +14,31 @@ namespace task_management.Services.Implements
             _profileRepository = profileRepository;
         }
 
-        public async Task<User?> GetProfile(int id)
+        public async Task<UserDto?> GetProfile(int id)
         {
             var user = await _profileRepository.GetProfile(id);
 
-            return user;
+            var result = ConvertUserToUserDto(user);
+
+            return result;
         }
 
         public async Task UpdateProfile(int id, User user)
         {
             await _profileRepository.UpdateProfile(id, user);
+        }
+
+        private static UserDto ConvertUserToUserDto(User? user)
+        {
+            return new UserDto
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Username = user.Username,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+            };
         }
 
     }
